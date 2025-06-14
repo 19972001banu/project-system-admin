@@ -7,7 +7,7 @@ menuToggle.addEventListener('click', () => {
 });
 
 // Contact form validation
-const contactForm = document.getElementById('contact-form');
+const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();

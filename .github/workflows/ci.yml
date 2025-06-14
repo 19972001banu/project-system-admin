@@ -1,4 +1,4 @@
-name: CI
+name: Node.js CI
 
 on:
   push:
@@ -9,16 +9,51 @@ on:
       - main
 
 jobs:
-  html-css-js-lint:
+  
+  unit-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]  
     steps:
       - uses: actions/checkout@v2
-      - name: Ensure htmlhint is executable
-        run: chmod +x ./node_modules/.bin/htmlhint
-      - name: Run HTMLHint
-        run: npx htmlhint '**/*.html'
-      - name: Ensure stylelint is executable
-        run: chmod +x ./node_modules/.bin/stylelint
-      - name: Run Stylelint
-        run: npx stylelint '**/*.css'
-      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm run test:unit
+
+ 
+  integration-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]  
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run integration tests
+        run: npm run test:integration
+  e2e-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]  
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run E2E tests
+        run: npm run test:e2e
