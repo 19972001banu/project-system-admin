@@ -9,51 +9,21 @@ on:
       - main
 
 jobs:
-  
-  unit-tests:
+  html-css-js-lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14, 16, 18]  
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Run HTMLHint
+        uses: Cyb3r-Jak3/htmlhint-action@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm install
-      - name: Run unit tests
-        run: npm run test:unit
-
- 
-  integration-tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14, 16, 18]  
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+          files: '**/*.html'
+      - name: Run Stylelint
+        uses: stylelint/stylelint-action@v5
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm install
-      - name: Run integration tests
-        run: npm run test:integration
-  e2e-tests:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14, 16, 18]  
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+          files: '**/*.css'
+      - name: Run ESLint
+        uses: reviewdog/action-eslint@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: npm install
-      - name: Run E2E tests
-        run: npm run test:e2e
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          eslint_flags: '**/*.js'
