@@ -14,16 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run HTMLHint
-        uses: Cyb3r-Jak3/htmlhint-action@v1
-        with:
-          files: '**/*.html'
+        run: npx htmlhint '**/*.html'
       - name: Run Stylelint
-        uses: stylelint/stylelint-action@v5
-        with:
-          files: '**/*.css'
+        run: npx stylelint '**/*.css'
       - name: Run ESLint
-        uses: reviewdog/action-eslint@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          eslint_flags: '**/*.js'
+        run: npx eslint '**/*.js'

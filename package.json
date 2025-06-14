@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/19972001banu/project-system-admin/issues"
   },
-  "homepage": "https://github.com/19972001banu/project-system-admin#readme"
+  "homepage": "https://github.com/19972001banu/project-system-admin#readme",
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "htmlhint": "^1.5.1",
+    "stylelint": "^16.20.0"
+  }
 }
