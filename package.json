@@ -4,7 +4,9 @@
   "description": "This is a simple, modern, and responsive website for a coffee shop, built with HTML, CSS, and JavaScript.",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx serve .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo 'No build step needed for static site'"
   },
   "repository": {
     "type": "git",
