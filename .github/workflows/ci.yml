@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Ensure htmlhint is executable
+        run: chmod +x ./node_modules/.bin/htmlhint
       - name: Run HTMLHint
         run: npx htmlhint '**/*.html'
       - name: Run Stylelint
