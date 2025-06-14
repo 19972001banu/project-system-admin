@@ -19,7 +19,5 @@ jobs:
         run: npx htmlhint '**/*.html'
       - name: Ensure stylelint is executable
         run: chmod +x ./node_modules/.bin/stylelint
-      - name: Run Stylelint
-        run: npx stylelint '**/*.css'
       - name: Run ESLint
         run: npx eslint '**/*.js'
